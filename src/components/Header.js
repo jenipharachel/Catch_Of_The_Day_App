@@ -4,12 +4,12 @@ const Header = props => (
   /*stateless functional component*/
   <header className="top">
     <h1>
-      Fresh
+      Catch
       <span className="ofThe">
-        <span className="of">off</span>
+        <span className="of">of</span>
         <span className="the">the</span>
       </span>
-      Boat
+      Day
     </h1>
     <h3 className="tagline">
       <span>{props.tagline}</span>
