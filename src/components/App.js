@@ -14,21 +14,35 @@ class App extends React.Component {
 
   /*LifeCycle Methods*/
   componentDidMount() {
-    {
-      /*listens for changes and persists data in the app*/
-    }
+    /*listens for changes and persists data in the app*/
+
     const { params } = this.props.match;
+    // reinstating our localStorage
+    const localStorageRef = localStorage.getItem(params.storeId);
+    if (localStorageRef) {
+      this.setState({ order: JSON.parse(localStorageRef) });
+    }
+    // syncing from database
     this.ref = base.syncState(`${params.storeId}/fishes`, {
       context: this,
       state: "fishes"
     });
   }
+
+  componentDidUpdate() {
+    /*used to update the changes in order state to localStorage of browser*/
+    localStorage.setItem(
+      this.props.match.params.storeId,
+      JSON.stringify(this.state.order)
+    );
+  }
+
   componentWillUnmount() {
     /*stops listening for changes when user leaves the app*/
     base.removeBinding(this.ref);
   }
 
-  /*custom methods*/
+  /*Custom Methods*/
   addFish = fish => {
     // take a copy of the existing state
     const fishes = { ...this.state.fishes };
