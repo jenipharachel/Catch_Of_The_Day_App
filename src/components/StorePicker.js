@@ -1,8 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { getFunName } from "../helpers";
 
 class StorePicker extends React.Component {
   myInput = React.createRef();
+
+  static propTypes = {
+    history: PropTypes.object.isRequired
+  };
 
   handleSubmit = event => {
     // 1. Stop the form from reloading on submit
@@ -19,7 +24,7 @@ class StorePicker extends React.Component {
         <h2>Enter a Store name</h2>
         <input
           type="text"
-          ref = {this.myInput}
+          ref={this.myInput}
           placeholder="Store Name"
           defaultValue={getFunName()} /* () runs on page load */
           required
